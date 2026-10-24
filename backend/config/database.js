@@ -8,8 +8,16 @@ const connectDB = async () => {
       process.exit(1);
     }
 
+    const targetDb = process.env.DB_NAME || (process.env.NODE_ENV === 'staging' ? 'studentDB_staging' : 'studentDB');
+
+    // Strict safety check: Staging environment must NEVER target production studentDB
+    if (process.env.NODE_ENV === 'staging' && targetDb === 'studentDB') {
+      console.error('FATAL SAFETY ERROR: Staging environment is blocked from connecting to production database "studentDB".');
+      process.exit(1);
+    }
+
     const conn = await mongoose.connect(mongoURI, {
-      dbName: process.env.DB_NAME || 'studentDB'
+      dbName: targetDb
     });
 
     console.log(`MongoDB Connected: ${conn.connection.host} (Database: ${conn.connection.name})`);

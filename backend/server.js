@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const morgan = require('morgan');
+const mongoose = require('mongoose');
 require('dotenv').config();
 
 const connectDB = require('./config/database');
@@ -70,7 +71,9 @@ app.get('/', (req, res) => {
 app.get('/health', (req, res) => {
   res.status(200).json({
     status: 'UP',
-    database: 'connected',
+    database: mongoose.connection.readyState === 1 ? 'connected' : 'disconnected',
+    databaseName: mongoose.connection.name || 'unknown',
+    environment: process.env.NODE_ENV || 'development',
     timestamp: new Date().toISOString()
   });
 });
