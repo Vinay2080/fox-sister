@@ -170,7 +170,7 @@ export default function App() {
           </div>
 
           <button
-            className="btn btn-primary"
+            className="btn btn-pink"
             onClick={() => {
               setStudentToEdit(null);
               setIsModalOpen(true);

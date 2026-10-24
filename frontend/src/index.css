@@ -321,6 +321,17 @@ body {
   transform: translateY(-1px);
 }
 
+.btn-pink {
+  background: #ec4899;
+  color: #ffffff;
+  box-shadow: 0 2px 4px rgba(236, 72, 153, 0.3);
+}
+
+.btn-pink:hover {
+  background: #db2777;
+  transform: translateY(-1px);
+}
+
 .btn-secondary {
   background: #ffffff;
   color: var(--text-main);

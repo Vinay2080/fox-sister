@@ -8,7 +8,8 @@
     "install:all": "npm run install:backend && npm run install:frontend",
     "start:backend": "npm start --prefix backend",
     "start:frontend": "npm run dev --prefix frontend",
-    "build:frontend": "npm run build --prefix frontend"
+    "build:frontend": "npm run build --prefix frontend",
+    "check": "npm run build:frontend && node -c backend/server.js && node -c backend/config/database.js && node -c backend/controllers/studentController.js"
   },
   "keywords": [
     "three-tier-architecture",

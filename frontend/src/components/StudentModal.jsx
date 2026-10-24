@@ -213,7 +213,7 @@ export default function StudentModal({ isOpen, onClose, onSave, studentToEdit })
             <button type="button" className="btn btn-secondary" onClick={onClose} disabled={submitting}>
               Cancel
             </button>
-            <button type="submit" className="btn btn-primary" disabled={submitting}>
+            <button type="submit" className={`btn ${isEditing ? 'btn-primary' : 'btn-pink'}`} disabled={submitting}>
               {submitting ? (
                 'Saving...'
               ) : isEditing ? (
