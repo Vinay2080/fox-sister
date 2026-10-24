@@ -40,6 +40,7 @@ export default function StudentTable({ students, loading, onEdit, onDelete }) {
               <th>Email Address</th>
               <th>Department</th>
               <th>Semester</th>
+              <th>CGPA</th>
               <th>Contact</th>
               <th style={{ textAlign: 'right' }}>Actions</th>
             </tr>
@@ -60,6 +61,15 @@ export default function StudentTable({ students, loading, onEdit, onDelete }) {
                 <td>{student.department}</td>
                 <td>
                   <span className="semester-badge">Sem {student.semester}</span>
+                </td>
+                <td>
+                  {student.cgpa != null ? (
+                    <span className="cgpa-badge">
+                      {Number(student.cgpa).toFixed(2)}
+                    </span>
+                  ) : (
+                    <span style={{ color: '#94a3b8', fontSize: '0.85rem' }}>—</span>
+                  )}
                 </td>
                 <td style={{ color: '#475569' }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>

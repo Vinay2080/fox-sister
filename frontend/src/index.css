@@ -438,6 +438,17 @@ body {
   display: inline-block;
 }
 
+.cgpa-badge {
+  background: #fdf2f8;
+  color: #db2777;
+  font-weight: 700;
+  font-size: 0.75rem;
+  padding: 0.2rem 0.6rem;
+  border-radius: 9999px;
+  display: inline-block;
+  border: 1px solid #fbcfe8;
+}
+
 .table-actions {
   display: flex;
   align-items: center;

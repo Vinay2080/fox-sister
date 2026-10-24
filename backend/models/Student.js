@@ -39,6 +39,12 @@ const studentSchema = new mongoose.Schema(
       type: String,
       required: [true, 'Contact number is required'],
       trim: true
+    },
+    cgpa: {
+      type: Number,
+      min: [0, 'CGPA cannot be negative'],
+      max: [10, 'CGPA cannot exceed 10.0'],
+      default: null
     }
   },
   {

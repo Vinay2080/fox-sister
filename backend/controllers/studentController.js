@@ -75,7 +75,7 @@ exports.getStudentById = async (req, res) => {
 // @route   POST /api/students
 exports.createStudent = async (req, res) => {
   try {
-    const { studentId, name, email, department, semester, contact } = req.body;
+    const { studentId, name, email, department, semester, contact, cgpa } = req.body;
 
     if (!studentId || !name || !email || !department || !semester || !contact) {
       return res.status(400).json({
@@ -99,7 +99,8 @@ exports.createStudent = async (req, res) => {
       email: email.trim().toLowerCase(),
       department: department.trim(),
       semester: Number(semester),
-      contact: contact.trim()
+      contact: contact.trim(),
+      cgpa: cgpa !== undefined && cgpa !== '' && cgpa !== null ? Number(cgpa) : undefined
     });
 
     res.status(201).json({
@@ -146,7 +147,7 @@ exports.updateStudent = async (req, res) => {
       });
     }
 
-    const { studentId, name, email, department, semester, contact } = req.body;
+    const { studentId, name, email, department, semester, contact, cgpa } = req.body;
 
     if (studentId && studentId.trim().toUpperCase() !== student.studentId) {
       const duplicate = await Student.findOne({ studentId: studentId.trim().toUpperCase() });
@@ -164,6 +165,9 @@ exports.updateStudent = async (req, res) => {
     if (department !== undefined) student.department = department.trim();
     if (semester !== undefined) student.semester = Number(semester);
     if (contact !== undefined) student.contact = contact.trim();
+    if (cgpa !== undefined) {
+      student.cgpa = cgpa !== '' && cgpa !== null ? Number(cgpa) : null;
+    }
 
     const updatedStudent = await student.save();
 

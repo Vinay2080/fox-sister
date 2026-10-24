@@ -10,7 +10,8 @@ export default function StudentModal({ isOpen, onClose, onSave, studentToEdit })
     email: '',
     department: 'Computer Science',
     semester: 1,
-    contact: ''
+    contact: '',
+    cgpa: ''
   };
 
   const [formData, setFormData] = useState(initialFormState);
@@ -25,7 +26,8 @@ export default function StudentModal({ isOpen, onClose, onSave, studentToEdit })
         email: studentToEdit.email || '',
         department: studentToEdit.department || 'Computer Science',
         semester: studentToEdit.semester || 1,
-        contact: studentToEdit.contact || ''
+        contact: studentToEdit.contact || '',
+        cgpa: studentToEdit.cgpa != null ? studentToEdit.cgpa : ''
       });
     } else {
       setFormData(initialFormState);
@@ -39,7 +41,7 @@ export default function StudentModal({ isOpen, onClose, onSave, studentToEdit })
     const { name, value } = e.target;
     setFormData((prev) => ({
       ...prev,
-      [name]: name === 'semester' ? Number(value) : value
+      [name]: name === 'semester' ? Number(value) : (name === 'cgpa' ? (value === '' ? '' : Number(value)) : value)
     }));
   };
 
@@ -204,6 +206,24 @@ export default function StudentModal({ isOpen, onClose, onSave, studentToEdit })
                   value={formData.contact}
                   onChange={handleChange}
                   required
+                />
+              </div>
+
+              {/* CGPA */}
+              <div className="form-group col-span-2">
+                <label className="form-label">
+                  CGPA / GPA (Scale 0.0 - 10.0)
+                </label>
+                <input
+                  type="number"
+                  step="0.01"
+                  min="0"
+                  max="10"
+                  name="cgpa"
+                  className="form-control"
+                  placeholder="e.g. 8.75"
+                  value={formData.cgpa !== undefined && formData.cgpa !== null ? formData.cgpa : ''}
+                  onChange={handleChange}
                 />
               </div>
             </div>
